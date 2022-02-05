@@ -14,3 +14,40 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+.w-form {
+  width: 100%;
+  font-size: 13px;
+}
+
+.form-item {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+  display: flex;
+}
+
+/* .w-form > div > label {
+  
+} */
+
+.form-item > input {
+  width: 70%;
+  padding: 10px;
+}
+.form-item > label {
+  width: 30%;
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  background-color: rgb(30, 55, 122);
+  color: #ffffff;
+  margin-top: 20px;
+
+}
+.w-btn {
+  text-align: center;
+}
