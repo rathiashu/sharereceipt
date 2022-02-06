@@ -80,9 +80,7 @@ function PageWithJSbasedForm({rid}) {
     })
 
     const data = {
-      message: messageTemplate(postData, rid), // required
-      title: 'Awesome Website', // optional parameter
-      url: 'https://www.awesomeexample.com', // optional parameter
+      message: messageTemplate(postData, rid) // required
     };
 
     fetch('/api/receipt', {
