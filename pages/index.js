@@ -3,16 +3,13 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { shareTextToWhatsApp, shareTextViaNativeSharing, numberFormat } from '../utils/index';
 
-import { getAll } from '../utils/dataHandler';
 
-// for server side
-// const fs = require('fs');
-
-export function getServerSideProps() {
-  let receipts = getAll();
-  const id = receipts.length ? Math.max(...receipts.map(x => x.id)) + 1 : 1;
-  return { props: { receiptId:  id} }
-}
+// export function getServerSideProps() {
+//   // let receipts = getAll();
+//   // const id = receipts.length ? Math.max(...receipts.map(x => x.id)) + 1 : 1;
+//   // return { props: { receiptId:  id} }
+//   return { props: { receiptId:  1} }
+// }
 
 export default function Home(props) {
   return (
@@ -31,29 +28,8 @@ export default function Home(props) {
   )
 }
 
-function messageTemplate( data, rid) {
-  let date = new Date();
-  const formattedDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
-  const temp = 
-  
-  `*Ramlila Textiles*       Date: ${formattedDate}
-  
-  *To:* ${data.partyName}
 
-  ***_Order Confirmation_***
-  *Order Number:* ${rid}
-  *Quality:* ${data.quality}
-  *Quantity:* ${data.quantity}
-  *Rate:* ${numberFormat(data.rate, true)}
-  *Weaver:* ${data.weaver}
-  *Payment:* ${numberFormat(data.payment, true)}
-
-  *We are not responsible for any loss or damage in transit*
-  *We will not accept any claim after processing of goods*`;
-  return temp;
-}
-
-function PageWithJSbasedForm({rid}) {
+function PageWithJSbasedForm() {
   // Handles the submit event on form submit.
   const handleSubmit = async (event) => {
     // Stop the form from submitting and refreshing the page.
@@ -65,7 +41,7 @@ function PageWithJSbasedForm({rid}) {
       'rate': "",
       'weaver': "",
       'payment': "",
-      'quality': "",
+      'quantity': "",
       "partyName": "",
     }
 
@@ -79,28 +55,56 @@ function PageWithJSbasedForm({rid}) {
       postData[key] = formData[key].value;
     })
 
-    const data = {
-      message: messageTemplate(postData, rid) // required
-    };
-
-    fetch('/api/receipt', {
+    fetch('/api/addOrder', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(postData),
     })
-    
-    shareTextViaNativeSharing(data, () => {
-      // fallback function if native sharing is not supported
-      // for example, send the message via the Click to Chat feature instead
-      shareTextToWhatsApp(data.message);
-    });
+    .then((res) => res.json())
+    .then((data) => {
+      // setData(data)
+      // setLoading(false)
+      console.log(data);
+      const msgContent = {
+        message: messageTemplate(postData, data.order_id) // required
+      };
+      const form = document.getElementById("orderForm");
+      form.reset();
+      shareTextViaNativeSharing(msgContent, () => {
+        // fallback function if native sharing is not supported
+        // for example, send the message via the Click to Chat feature instead
+        shareTextToWhatsApp(msgContent.message);
+      });
+    })
+
   }
+
+  const messageTemplate = ( data, rid) => {
+    let date = new Date();
+    const formattedDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
+    const temp = 
+    
+    `*Ramlila Textiles*       Date: ${formattedDate}
+    
+    *To:* ${data.partyName}
+  
+    ***_Order Confirmation_***
+    *Order Number:* ${rid}
+    *Quality:* ${data.quality}
+    *Quantity:* ${data.quantity}
+    *Rate:* ${data.rate}
+    *Weaver:* ${data.weaver}
+    *Payment:* ${data.payment}
+  
+    *We are not responsible for any loss or damage in transit*
+    *We will not accept any claim after processing of goods*`;
+    return temp;
+  }
+  
   
   return (
     <div  className="w-form">
-      <form onSubmit={handleSubmit}>
+      <form id ="orderForm" onSubmit={handleSubmit}>
         {/* <div className="form-item">
           <label htmlFor="orderNumber">Order Number</label>
           <input type="text" id="orderNumber" name="orderNumber" value={rid || ''} required />
@@ -119,7 +123,7 @@ function PageWithJSbasedForm({rid}) {
         </div>
         <div className="form-item">
           <label htmlFor="rate">Rate</label>
-          <input type="number" id="rate" name="rate" required />
+          <input type="text" id="rate" name="rate" required />
         </div>
         <div className="form-item">
           <label htmlFor="weaver">Weaver Name</label>
@@ -131,7 +135,7 @@ function PageWithJSbasedForm({rid}) {
         </div>
         <div className="form-item">
           <label htmlFor="payment">Payment</label>
-          <input type="number" id="payment" name="payment" required />
+          <input type="text" id="payment" name="payment" required />
         </div>
         <div className="w-btn">
           <button type="submit">Submit</button>
