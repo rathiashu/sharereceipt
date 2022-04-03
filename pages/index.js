@@ -61,7 +61,7 @@ function PageWithJSbasedForm() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(postData),
     })
-    .then((res) => res.json())
+    .then((res) => res.clone().json())
     .then((data) => {
       // setData(data)
       // setLoading(false)
