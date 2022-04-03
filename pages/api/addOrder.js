@@ -2,6 +2,7 @@
 
 // import { create } from '../../utils/dataHandler';
 import prisma from '../../lib/prisma';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 
 export default async function handler(req, res) {
