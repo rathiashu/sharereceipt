@@ -17,6 +17,7 @@ model order {
   quantity    String?
   rate    String?
   weaverName    String?
+  weaverPrice String?
   partyName    String?
   payment String?
 }

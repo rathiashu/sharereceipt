@@ -1,0 +1,43 @@
+
+
+.container {
+  background: #5696b2;
+  display: flex;
+  position: fixed;
+  top: 0;
+  font-family: "Fira Sans", sans-serif;
+  font-size: 17px;
+  width: 100%;
+}
+.logo {
+  font-size: 21px;
+  padding-left: 10px;
+  display: flex;
+
+}
+// .nav {
+//   a {
+//     padding: 2px 5px;
+//     color: white;
+//   }
+// }
+
+
+.nav {
+  overflow: hidden;
+  margin-left: 50px;
+  width: 100%;
+  display: flex;
+      
+  a {
+    color: #f2f2f2;
+    text-decoration: none;
+    padding: 14px 20px;
+    height: 100%;
+    line-height: 40px;
+    
+    &:hover {
+      background-color: #111;
+    }
+  }
+}

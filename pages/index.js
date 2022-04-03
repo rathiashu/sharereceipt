@@ -1,6 +1,6 @@
 
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
 import { shareTextToWhatsApp, shareTextViaNativeSharing, numberFormat } from '../utils/index';
 
 
@@ -21,7 +21,7 @@ export default function Home(props) {
       </Head>
       <main>
         <h1>
-          <PageWithJSbasedForm rid={props.receiptId}/>
+          <PageWithJSbasedForm rid={props.receiptId}/> 
         </h1>
       </main>
     </div>
@@ -40,6 +40,7 @@ function PageWithJSbasedForm() {
       // 'weight': "",
       'rate': "",
       'weaver': "",
+      'weaverPrice': "",
       'payment': "",
       'quantity': "",
       "partyName": "",
@@ -128,6 +129,10 @@ function PageWithJSbasedForm() {
         <div className="form-item">
           <label htmlFor="weaver">Weaver Name</label>
           <input type="text" id="weaver" name="weaver" required />
+        </div>
+        <div className="form-item">
+          <label htmlFor="weaver">Weaver Price</label>
+          <input type="text" id="weaver-price" name="weaverPrice" required />
         </div>
         <div className="form-item">
           <label htmlFor="partyName">Party Name</label>

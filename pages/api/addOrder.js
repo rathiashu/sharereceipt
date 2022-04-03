@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     res.status(405).send({ message: 'Only POST requests allowed' })
     return
   }
-  const { quality, rate, weaver, payment, quantity, partyName } = req.body;
+  const { quality, rate, weaver, payment, quantity, partyName, weaverPrice } = req.body;
 
   const result =  await prisma.order.create({
     data: {
@@ -17,6 +17,7 @@ export default async function handler(req, res) {
       'quantity': quantity,
       'rate': rate,
       'weaverName': weaver,
+      'weaverPrice': weaverPrice,
       'partyName': partyName,
       'payment': payment,
     },

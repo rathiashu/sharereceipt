@@ -8,14 +8,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
     "@prisma/client": "^3.11.0",
+    "babel-loader": "^8.2.4",
+    "match-sorter": "^6.3.1",
     "next": "12.0.10",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-table": "^7.7.0"
   },
   "devDependencies": {
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
-    "prisma": "^3.11.0"
-  }
+    "prisma": "^3.11.0",
+    "sass": "^1.49.9"
+  },
+  "browserslist": [
+    "since 2017-06"
+  ]
 }
