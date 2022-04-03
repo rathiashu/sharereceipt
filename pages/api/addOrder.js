@@ -22,7 +22,9 @@ export default async function handler(req, res) {
       'payment': payment,
     },
   });
-  res.json(result);
+  // res.json(result);
+  res.status(200).send(result);
+
 
   // the rest of your code
 }
