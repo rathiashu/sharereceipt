@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   }
   const result = await prisma.order.findMany();
 
-  res.json(result);
+  res.status(200).send(result);
 
   // the rest of your code
 }

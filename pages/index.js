@@ -61,11 +61,10 @@ function PageWithJSbasedForm() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(postData),
     })
-    // .then((res) => res.json())
+    .then((res) => res.json())
     .then((data) => {
       // setData(data)
       // setLoading(false)
-      console.log(data);
       const msgContent = {
         message: messageTemplate(postData, data.order_id) // required
       };
