@@ -12,7 +12,7 @@ export const Navbar = () => {
         <Link href='/'>
           <a className={styles.logo}>
             <Image
-              src="/../public/ramleela-logo.png"
+              src="../public/ramleela-logo.png"
               alt="Ramleela"
               width={100}
               height={40}
