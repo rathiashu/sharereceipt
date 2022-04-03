@@ -243,7 +243,7 @@ function Table({ columns, data }) {
         <thead>
           {headerGroups.map((headerGroup, index) => (
             <tr key={`header-${index}`} {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => {
+              {headerGroup.headers.map((column, index) => {
                 return (
                 // <th {...column.getHeaderProps()}>
                 //   {column.render('Header')}
@@ -284,8 +284,8 @@ function Table({ columns, data }) {
           {firstPageRows.map((row, i) => {
             prepareRow(row);
             return (
-              <tr key={`tr-${index}`}  className="dtable-row" {...row.getRowProps()}>
-                {row.cells.map(cell => {
+              <tr key={`tr-${i}`}  className="dtable-row" {...row.getRowProps()}>
+                {row.cells.map((cell, index) => {
                   return <td key={`col-${index}`} {...cell.getCellProps() } style={{width:`${cell.column.width}%`}}>{cell.render('Cell')}</td>
                 })}
               </tr>
