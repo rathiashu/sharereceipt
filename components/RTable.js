@@ -241,17 +241,15 @@ function Table({ columns, data }) {
     <>
       <table className='details-table' {...getTableProps()}>
         <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+          {headerGroups.map((headerGroup, index) => (
+            <tr key={`header-${index}`} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => {
-                console.log("column", column);
-
                 return (
                 // <th {...column.getHeaderProps()}>
                 //   {column.render('Header')}
                 //   {/* Render the columns filter UI */}
                 // </th>
-                <th {...column.getHeaderProps(column.hideSort ? {} : column.getSortByToggleProps())} style={{width:`${column.width}%`}}>
+                <th key={`theader-${index}`} {...column.getHeaderProps(column.hideSort ? {} : column.getSortByToggleProps())} style={{width:`${column.width}%`}}>
                   {column.render('Header')}
                   {/* Add a sort direction indicator */}
                   <span>
@@ -285,12 +283,10 @@ function Table({ columns, data }) {
         <tbody {...getTableBodyProps()}>
           {firstPageRows.map((row, i) => {
             prepareRow(row);
-            console.log(row)
             return (
-              <tr className="dtable-row" {...row.getRowProps()}>
+              <tr key={`tr-${index}`}  className="dtable-row" {...row.getRowProps()}>
                 {row.cells.map(cell => {
-                  console.log("cell",cell)
-                  return <td {...cell.getCellProps() } style={{width:`${cell.column.width}%`}}>{cell.render('Cell')}</td>
+                  return <td key={`col-${index}`} {...cell.getCellProps() } style={{width:`${cell.column.width}%`}}>{cell.render('Cell')}</td>
                 })}
               </tr>
             )
