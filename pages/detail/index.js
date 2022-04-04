@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head'
 import styles from '../../styles/detail.module.scss'
 import {RTable} from '../../components/RTable';
 
-export default function Detail() {
+export default function detail() {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     fetch('/api/order', {

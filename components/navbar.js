@@ -15,7 +15,7 @@ export const Navbar = () => {
         <Link href='/'>
           <a className={styles.logo}>
             <Image
-              src="/../public/ramleela-logo.png"
+              src="/ramleela-logo.png"
               alt="Ramleela"
               width={100}
               height={40}
@@ -31,8 +31,8 @@ export const Navbar = () => {
                 Bill
               </a>
             </Link>
-            <Link href='/Detail'>
-              <a className={router.pathname == "/Detail" ? styles.active  : ""}>
+            <Link href='/detail'>
+              <a className={router.pathname == "/detail" ? styles.active  : ""}>
                 Details
               </a>
             </Link>
