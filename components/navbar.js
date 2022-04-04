@@ -28,7 +28,7 @@ export const Navbar = () => {
                 Bill
               </a>
             </Link>
-            <Link href='/detail'>
+            <Link href='/Detail'>
               <a className=''>
                 Details
               </a>

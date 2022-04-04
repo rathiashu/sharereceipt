@@ -1,16 +1,22 @@
 
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head'
 import styles from '../../styles/detail.module.scss'
 import {RTable} from '../../components/RTable';
-import prisma from '../../lib/prisma';
 
+export default function Detail() {
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    fetch('/api/order', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      setOrders(data);
+    })
+  }, []);
 
-export async function getStaticProps() {
-    const result = await prisma.order.findMany();
-    return {props: { orders: JSON.parse(JSON.stringify(result))}};
-}
-
-export default function detail({orders}) {
   return (
     <div className={styles.container}>
       <Head>
