@@ -2,9 +2,12 @@
 import Link from 'next/link';
 import Image from 'next/image'
 import styles from '../styles/Navbar.module.scss'
+import { useRouter } from "next/router";
 
 
 export const Navbar = () => {
+  const router = useRouter();
+
   return (
     <>
       
@@ -24,12 +27,12 @@ export const Navbar = () => {
         <div className={styles.nav}>
           <div className=''>
             <Link href='/'>
-              <a className=''>
+              <a className={router.pathname == "/" ? styles.active : ""}>
                 Bill
               </a>
             </Link>
             <Link href='/Detail'>
-              <a className=''>
+              <a className={router.pathname == "/Detail" ? styles.active  : ""}>
                 Details
               </a>
             </Link>
