@@ -241,37 +241,12 @@ export const RTable = (props) => {
         // showfilter: true
       },
       {
-        Header: 'Quality',
-        accessor: 'quality',
-        width: '10'
-
-      },
-      {
-        Header: 'Quantity',
-        accessor: 'quantity',
-        width: '10'
-
-      },
-      {
-        Header: 'Rate',
-        accessor: 'rate',
-        width: '10'
-
-      },
-      {
         Header: 'Weaver Name',
         accessor: 'weaverName',
         showfilter: true,
         Filter: SelectColumnFilter,
         hideSort: true,
-        width: '22'
-
-      },
-      {
-        Header: 'Weaver Price',
-        accessor: 'weaverPrice',
-        width: '10'
-
+        width: '20'
       },
       {
         Header: 'Party Name',
@@ -279,14 +254,52 @@ export const RTable = (props) => {
         showfilter: true,
         Filter: SelectColumnFilter,
         hideSort: true,
-        width: '22'
+        width: '20'
+      },
+      {
+        Header: 'Order Date',
+        accessor: 'orderDate',
+        width: '9',
+        sortType: (a, b) => {
+          var a1 = new Date(a.original.createdAt).getTime();
+          var b1 = new Date(b.original.createdAt).getTime();
+          if(b1<a1)
+            return 1;
+          else if(b1>a1)
+            return -1;
+          else
+            return 0;
+        }
+      },
+      {
+        Header: 'Quality',
+        accessor: 'quality',
+        width: '9'
 
+      },
+      {
+        Header: 'Quantity',
+        accessor: 'quantity',
+        width: '9'
+
+      },
+      {
+        Header: 'Rate',
+        accessor: 'rate',
+        width: '9'
+
+      },
+      
+      {
+        Header: 'Weaver Price',
+        accessor: 'weaverPrice',
+        width: '9'
 
       },
       {
         Header: 'Payment',
         accessor: 'payment',
-        width: '10'
+        width: '9'
 
       },
     ],

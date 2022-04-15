@@ -7,6 +7,10 @@ import {RTable} from '../../components/RTable';
 
 export default function detail() {
   const [orders, setOrders] = useState([]);
+
+  const formateDate = (d) => {
+    return ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + d.getFullYear();
+  }
   useEffect(() => {
     fetch('/api/order', {
       method: 'GET',
@@ -14,7 +18,11 @@ export default function detail() {
     })
     .then((res) => res.json())
     .then((data) => {
-      setOrders(data);
+      const modifiedData = data.map(d => {
+        d.orderDate = formateDate(new Date(d.createdAt));
+        return d;
+      })
+      setOrders(modifiedData);
     })
   }, []);
 

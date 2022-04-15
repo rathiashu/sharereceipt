@@ -7,7 +7,13 @@ export default async function handler(req, res) {
     res.status(405).send({ message: 'Only POST requests allowed' })
     return
   }
-  const result = await prisma.order.findMany();
+  const result = await prisma.order.findMany({
+    orderBy: [
+      {
+        createdAt: 'desc',
+      },
+    ]
+  });
 
   res.status(200).send(result);
 

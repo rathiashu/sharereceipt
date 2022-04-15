@@ -53,7 +53,7 @@ function PageWithJSbasedForm() {
     // };
     const formData = event.target;
     Object.keys(postData).map(key => {
-      postData[key] = formData[key].value;
+      postData[key] = formData[key].value.trim();
     })
 
     fetch('/api/addOrder', {
