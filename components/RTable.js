@@ -1,8 +1,9 @@
 import React from 'react'
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy } from 'react-table'
 // A great library for fuzzy filtering/sorting items
-import matchSorter from 'match-sorter'
-import styles from '../styles/table.module.scss'
+import matchSorter from 'match-sorter';
+import sortList from '../utils';
+import styles from '../styles/table.module.scss';
 
 
 // Define a default UI for filtering
@@ -65,7 +66,24 @@ function SelectColumnFilter({
     preFilteredRows.forEach(row => {
       options.add(row.values[id])
     })
-    return [...options.values()]
+    return [...options.values()].sort((varA, varB) => {
+      if (varA == null || varB == null) {
+        // property doesn't exist on either object
+        return 0;
+      }
+      varA = (typeof varA === 'string')
+        ? varA.toUpperCase() : varA;
+      varB = (typeof varB === 'string')
+        ? varB.toUpperCase() : varB;
+  
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return comparison;
+  });
   }, [id, preFilteredRows])
 
   // Render a multi-select box

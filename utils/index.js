@@ -58,11 +58,32 @@ const numberFormat = (num, currency) => {
         : new Intl.NumberFormat('en-IN').format(num);
 }
 
+
+const sortList = (varA, varB) => {
+    if (varA == null || varB == null) {
+      // property doesn't exist on either object
+      return 0;
+    }
+    varA = (typeof varA === 'string')
+      ? varA.toUpperCase() : varA;
+    varB = (typeof varB === 'string')
+      ? varB.toUpperCase() : varB;
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return comparison;
+}
+
 export {
     getWhatsAppClickToChatLink,
     shareTextViaNativeSharing, 
     hasNativeSharingSupport,
     shareTextToWhatsApp,
     numberFormat,
+    sortList,
 }
 
