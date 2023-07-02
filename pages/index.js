@@ -89,7 +89,7 @@ function PageWithJSbasedForm() {
     *To:* ${data.partyName}
   
     ***_Order Confirmation_***
-    *Order Number:* ${rid}
+    *Order Number:* R${rid}
     *Quality:* ${data.quality}
     *Quantity:* ${data.quantity}
     *Rate:* ${data.rate}

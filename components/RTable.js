@@ -147,10 +147,6 @@ function Table({ columns, data }) {
     headerGroups,
     rows,
     prepareRow,
-    state,
-    visibleColumns,
-    preGlobalFilteredRows,
-    setGlobalFilter,
   } = useTable(
     {
       columns,
@@ -195,20 +191,6 @@ function Table({ columns, data }) {
               })}
             </tr>
           ))}
-          {/* <tr>
-            <th
-              colSpan={visibleColumns.length}
-              style={{
-                textAlign: 'left',
-              }}
-            >
-              <GlobalFilter
-                preGlobalFilteredRows={preGlobalFilteredRows}
-                globalFilter={state.globalFilter}
-                setGlobalFilter={setGlobalFilter}
-              />
-            </th>
-          </tr> */}
         </thead>
         <tbody {...getTableBodyProps()}>
           {rows.map((row, i) => {
@@ -224,12 +206,6 @@ function Table({ columns, data }) {
         </tbody>
       </table>
       <br />
-      {/* <div>Showing the first 20 results of {rows.length} rows</div>
-      <div>
-        <pre>
-          <code>{JSON.stringify(state.filters, null, 2)}</code>
-        </pre>
-      </div> */}
     </>
   )
 }
@@ -255,7 +231,8 @@ export const RTable = (props) => {
       {
         Header: 'Order Id',
         accessor: 'order_id',
-        width: '6'
+        width: '6',
+        Cell: ({ row }) => `R${row.original.order_id}`,
         // showfilter: true
       },
       {
